@@ -1,0 +1,19 @@
+.tile.date title=id
+  =postedAt
+.tile.amount
+  = amountString
+if isEditing
+  form action='#'
+    .tile.category class=errors.category_id
+      view App.CategorySelect contentBinding="controllers.transactions.categoryOptions" valueBinding="category_id" optionLabelPath='content.name' optionValuePath='content.id'
+    .tile.description class=matcher.errors.words
+      input value=matcher.words
+      button.btn.btn-mini click='save'
+        %i.icon-ok
+      button.btn.btn-mini click='cancel'
+         %i.icon-remove
+else
+  .tile.category click='setEdit'
+    = view.categoryName
+  .tile.description click='setEdit'
+    = description

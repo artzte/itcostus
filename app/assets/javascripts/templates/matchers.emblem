@@ -1,0 +1,3 @@
+h1 Matchers
+= view.hello_greeting
+p Another greeting #{view.hello_greeting}

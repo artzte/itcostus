@@ -1,0 +1,11 @@
+h1 Main
+.transactions-list
+  .filters
+    view App.CategorySelect contentBinding="categoryOptions" valueBinding="selectedCategoryId" optionLabelPath='content.name' optionValuePath='content.id'
+  .counts
+    = model.length
+    | &nbsp; transactions
+  .clearfix
+  .transactions
+    collection App.TransactionListView contentBinding="controller" classBinding="list" height=500 rowHeight=30
+

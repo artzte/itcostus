@@ -87,7 +87,7 @@ class Transaction < ActiveRecord::Base
 
       exists = Transaction
         .where(account: account)
-        .where(_transaction_id: transaction_id)
+        .where(transaction_id: transaction_id)
         .first
         # .where(_transaction_date: row[:transaction_date])
         # .where(_amount: row[:amount])
@@ -106,11 +106,7 @@ class Transaction < ActiveRecord::Base
       end
       
       Transaction.create posted_at: time,
-        _transaction_date: row[:transaction_date],
-        _amount: row[:amount],
-        _description: description,
-        _transtype: transtype,
-        _transaction_id: transaction_id,
+        transaction_id: transaction_id,
         account: account,
         amount: row[:amount].to_f,
         transaction_type: transaction_type,

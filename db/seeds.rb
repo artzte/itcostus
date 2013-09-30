@@ -7,3 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Category.create name: 'Unassigned', system_type: Category::TYPE_UNASSIGNED
+%w{Grocery Restaurant Utilities Mortgage/Rent Insurance Transportation Children Entertainment Gear Shopping Cash Household Home-Improvement Loans Fees}.each do |category|
+	Category.create name: category
+end

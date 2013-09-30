@@ -5,7 +5,7 @@
 //= require list-view.prod
 //= require moment.min
 //= require_tree ./boot
-//= require models
+//= require_tree ./models
 //= require_tree ./controllers
 //= require_tree ./templates
 //= require app

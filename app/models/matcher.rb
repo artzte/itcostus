@@ -1,6 +1,6 @@
 class Matcher < ActiveRecord::Base
-  has_many :categories_transactions
-  has_many :transactions, through: :categories_transactions
+  has_many :category_transactions
+  has_many :transactions, through: :category_transactions
   belongs_to :category
 
   validates_format_of :words, with: /\w{3,}/, message: 'must be nonblank string with at least a three-character word present'
@@ -13,7 +13,7 @@ class Matcher < ActiveRecord::Base
   end
 
   def split_words
-    @split_words ||= words.split
+    @split_words ||= words.downcase.split
   end
 
   def match transaction
@@ -27,6 +27,17 @@ class Matcher < ActiveRecord::Base
 
     # successful match if the transaction contains all the words in the matcher
     return category
+  end
+
+  def run transactions
+    matched = []
+    transactions.each do |t|
+      if match(t)
+        CategoryTransaction.create! matcher: self, transaction: t, category: category
+        matched << t
+      end
+    end
+    matched
   end
 
 end

@@ -6,7 +6,7 @@ class TransactionsController < ApplicationController
   end
   
   def index
-    transactions = Transaction.with_matcher
+    transactions = Transaction.with_matcher.order(:posted_at)
 
     transactions = transactions.from_date @from if @from
     transactions = transactions.to_date @to if @to    

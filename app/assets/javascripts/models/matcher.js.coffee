@@ -1,5 +1,6 @@
 App.Matcher = App.Model.extend
   id: Ember.attr()
+  category_id: Ember.attr(Number)
   category: Ember.belongsTo 'App.Category',
     key: 'category_id'
   transactions: Ember.hasMany 'App.Transaction',

@@ -14,3 +14,6 @@ App.Model = Ember.Model.extend
     @clearErrors()
     true
 
+$.ajaxSetup
+  headers:
+    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')

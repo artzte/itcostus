@@ -1,5 +1,5 @@
 class CategorySerializer < ActiveModel::Serializer
-  attributes :id, :name, :total, :count
+  attributes :id, :name, :total, :count, :system_type
 
   def count
     transactions.count

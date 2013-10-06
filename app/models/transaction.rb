@@ -81,7 +81,12 @@ class Transaction < ActiveRecord::Base
 
   def self.import filename, account
     CSV.foreach(filename, {:headers => true, :header_converters => :symbol}) do |row, i|
-      description = row[:extdesc]||row[:description]
+      description = if row[:extdesc].blank?
+          row[:description]
+        else
+          row[:extdesc]
+        end
+      description = "#{description} #{row[:check_number]}" if row[:check_number].present?
       transtype = row[:trandesc]||"CC Debit"
       transaction_id = row[:transaction_id]
 

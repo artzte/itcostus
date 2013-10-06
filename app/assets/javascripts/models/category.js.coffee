@@ -1,6 +1,7 @@
 App.Category = App.Model.extend
   id: Ember.attr()
   name: Ember.attr()
+  system_type: Ember.attr()
   count: Ember.attr(Number)
   total: Ember.attr(Number)
   transactions: Ember.hasMany 'App.Transaction',

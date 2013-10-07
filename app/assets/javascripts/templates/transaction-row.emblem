@@ -5,7 +5,7 @@
 if isEditing
   form action='#'
     .tile.category class=errors.category_id
-      view App.CategorySelect contentBinding="controllers.transactions.categoryOptions" valueBinding="matcher.category_id" optionLabelPath='content.name' optionValuePath='content.id'
+      view App.CategorySelect contentBinding="controllers.transactions.categoryOptions" valueBinding="matcher.category" optionLabelPath='content.name' optionValuePath='content'
     .tile.description class=matcher.errors.words
       input value=matcher.words
       button.btn.btn-mini click='save'

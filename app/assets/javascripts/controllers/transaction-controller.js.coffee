@@ -4,13 +4,12 @@ App.TransactionsController = Em.ArrayController.extend
   categoryOptions: (->
     @get 'controllers.categories.userCategories'
   ).property('controllers.categories.userCategories')
-  filterList: (->
-    categoryId = @get 'selectedCategoryId'
-    if Em.isNone(categoryId)
-      categoryId = null
-    @set 'model', App.Transaction.findAll().filterBy('category_id', categoryId)
-  ).observes('selectedCategoryId')
-
+  filteredList: (->
+    category_id = @get 'selectedCategory.id'
+    if Em.isNone(category_id)
+      category_id = null
+    @get('content').filterBy('category_id', category_id)
+  ).property('selectedCategory', 'content.@each.category_id')
 
 App.TransactionController = Em.ObjectController.extend
   needs: ['categories', 'transactions']

@@ -42,9 +42,6 @@ App.TransactionListItemView = Ember.ListItemView.extend
 App.TransactionListView = Ember.ListView.extend
   itemViewClass: App.TransactionListItemView
 
-App.CategoriesRoute = Em.Route.extend
-  model: ->
-    App.Category.findAll()
 
 p1 = App.Category.fetch()
 p2 = App.Matcher.fetch()

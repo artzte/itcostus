@@ -45,12 +45,6 @@ App.TransactionListView = Ember.ListView.extend
 App.CategoriesRoute = Em.Route.extend
   model: ->
     App.Category.findAll()
-App.TransactionsRoute = Em.Route.extend
-  model: ->
-    App.Transaction.findAll()
-  setupController: (controller, model) ->
-    @_super(controller, model)
-    controller.notifyPropertyChange 'selectedCategoryId'
 
 p1 = App.Category.fetch()
 p2 = App.Matcher.fetch()

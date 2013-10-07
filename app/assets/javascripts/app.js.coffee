@@ -1,6 +1,7 @@
 App.Router.map ->
   @route "transactions", {path: "/"}
-  @resource "categories", {path: "/categories"}
+  @resource "categories", {path: "/categories"}, ->
+    @route 'category', {path: ":id"}
   @resource "matchers", {path: "/matchers"}
 
 App.ProtoView = Em.View.extend

@@ -11,7 +11,7 @@
           if isEditing
             form.form-inline submit='save'
               .form-group.words
-                input value=matcher.words type='text' class='form-control'
+                = input value=matcher.words type='text' class='form-control'
               .form-group
                 view App.CategorySelect contentBinding="userCategories" valueBinding="matcher.category" optionLabelPath='content.name' optionValuePath='content' prompt='Pick a category' class='form-control'
               button.btn.btn-xs click='save'

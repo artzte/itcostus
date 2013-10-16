@@ -15,15 +15,21 @@ class CategorySerializer < ActiveModel::Serializer
 
   def transaction_ids
     join_sql = if object.unassigned?
-        "LEFT JOIN category_transactions ct ON (ct.transaction_id = txn.id) AND (ct.category_id IS NULL)"
+        "LEFT JOIN category_transactions ct ON (ct.transaction_id = txn.id)"
       else
         "INNER JOIN category_transactions ct ON (ct.transaction_id = txn.id) AND (ct.category_id = #{object.id})"
+      end
+    where_sql = if object.unassigned?
+        "WHERE ct.id IS NULL"
+      else
+        ""
       end
 
     Category.connection.select_values %Q{
         SELECT txn.id
         FROM transactions txn
         #{join_sql}
+        #{where_sql}
       }
   end
 

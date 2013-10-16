@@ -1,23 +1,20 @@
-.navbar.navbar-fixed-top
-  .navbar-inner
-    .container
-      a.btn.btn-navbar data-target='.nav-collapse' data-toggle='collapse'
+.navbar.navbar-fixed-top.navbar-inverse
+  .container
+    .navbar-header
+      button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-collapse"
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.brand href='/app' FTB
-
-      .nav-collapse.collapse
-        ul.nav
-          li
-            = linkTo 'transactions' | Home
-          li
-            = linkTo 'categories' | Categories
-          li
-            = linkTo 'matchers' | Matchers
+      = linkTo "categories" class=navbar-brand | itcost.us
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav
+        li.active
+          = linkTo "categories" | Home
+        li.active
+          = linkTo "matchers" | Matchers
 .container
-  .row
-    .span12
-      = yield
-  footer
-    p &copy; Company 2013
+  .itcostus
+    .row
+      .col-md-12
+        = yield
+  

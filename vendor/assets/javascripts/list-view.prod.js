@@ -371,7 +371,7 @@ Ember.ListViewMixin = Ember.Mixin.create({
 
   willInsertElement: function() {
     if (!this.get("height") || !this.get("rowHeight")) {
-      throw "A ListView must be created with a height and a rowHeight.";
+      throw new Error("A ListView must be created with a height and a rowHeight.");
     }
     this._super();
   },
@@ -420,7 +420,7 @@ Ember.ListViewMixin = Ember.Mixin.create({
     @method scrollTo
   */
   scrollTo: function(y) {
-    throw 'must override to perform the visual scroll and effectively delegate to _scrollContentTo';
+    throw new Error('must override to perform the visual scroll and effectively delegate to _scrollContentTo');
   },
 
   /**
@@ -461,12 +461,12 @@ Ember.ListViewMixin = Ember.Mixin.create({
 
       this.trigger('scrollYChanged', y);
 
+      this._reuseChildren();
+
       if (startingIndex === this._lastStartingIndex &&
           endingIndex === this._lastEndingIndex) {
         return;
       }
-
-      this._reuseChildren();
 
       this._lastStartingIndex = startingIndex;
       this._lastEndingIndex = endingIndex;
@@ -777,11 +777,6 @@ Ember.ListViewMixin = Ember.Mixin.create({
 
     this._scrollContentTo(get(this, 'scrollTop'));
 
-    // if _scrollContentTo short-circuits, we still need
-    // to call _reuseChildren to get new views positioned
-    // and rendered correctly
-    this._reuseChildren();
-
     this._lastStartingIndex = startingIndex;
     this._lastEndingIndex   = this._lastEndingIndex + delta;
   },
@@ -799,7 +794,7 @@ Ember.ListViewMixin = Ember.Mixin.create({
     scrollTop = get(this, 'scrollTop');
     contentLength = get(this, 'content.length');
     maxContentIndex = max(contentLength - 1, 0);
-    childViews = this._childViews;
+    childViews = this.getReusableChildViews();
     childViewsLength =  childViews.length;
 
     startingIndex = this._startingIndex();
@@ -819,10 +814,18 @@ Ember.ListViewMixin = Ember.Mixin.create({
 
   /**
     @private
+    @method getReusableChildViews
+  */
+  getReusableChildViews: function() {
+    return this._childViews;
+  },
+
+  /**
+    @private
     @method positionOrderedChildViews
   */
   positionOrderedChildViews: function() {
-    return this._childViews.sort(sortByContentIndex);
+    return this.getReusableChildViews().sort(sortByContentIndex);
   },
 
   arrayWillChange: Ember.K,
@@ -1195,6 +1198,7 @@ Ember.VirtualListView = Ember.ContainerView.extend(Ember.ListViewMixin, Ember.Vi
   init: function(){
     this._super();
     this.setupScroller();
+    this.setupPullToRefresh();
   },
   _scrollerTop: 0,
   applyTransform: Ember.ListViewHelper.apply3DTransform,
@@ -1221,6 +1225,56 @@ Ember.VirtualListView = Ember.ContainerView.extend(Ember.ListViewMixin, Ember.Vi
 
     view.trigger('didInitializeScroller');
     updateScrollerDimensions(view);
+  },
+  setupPullToRefresh: function() {
+    if (!this.pullToRefreshViewClass) { return; }
+    this._insertPullToRefreshView();
+    this._activateScrollerPullToRefresh();
+  },
+  _insertPullToRefreshView: function(){
+    this.pullToRefreshView = this.createChildView(this.pullToRefreshViewClass);
+    this.insertAt(0, this.pullToRefreshView);
+    var view = this;
+    this.pullToRefreshView.on('didInsertElement', function(){
+      view.applyTransform(this.get('element'), 0, -1 * view.pullToRefreshViewHeight);
+    });
+  },
+  _activateScrollerPullToRefresh: function(){
+    var view = this;
+    function activatePullToRefresh(){
+      view.pullToRefreshView.set('active', true);
+      view.trigger('activatePullToRefresh');
+    }
+    function deactivatePullToRefresh() {
+      view.pullToRefreshView.set('active', false);
+      view.trigger('deactivatePullToRefresh');
+    }
+    function startPullToRefresh() {
+      view.pullToRefreshView.set('refreshing', true);
+
+      function finishRefresh(){
+        if (view && !view.get('isDestroyed') && !view.get('isDestroying')) {
+          view.scroller.finishPullToRefresh();
+          view.pullToRefreshView.set('refreshing', false);
+        }
+      }
+      view.startRefresh(finishRefresh);
+    }
+    this.scroller.activatePullToRefresh(
+      this.pullToRefreshViewHeight,
+      activatePullToRefresh,
+      deactivatePullToRefresh,
+      startPullToRefresh
+    );
+  },
+
+  getReusableChildViews: function(){
+    var firstView = this._childViews[0];
+    if (firstView && firstView === this.pullToRefreshView) {
+      return this._childViews.slice(1);
+    } else {
+      return this._childViews;
+    }
   },
 
   scrollerDimensionsNeedToChange: Ember.observer(function() {

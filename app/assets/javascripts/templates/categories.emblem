@@ -1,6 +1,0 @@
-h1 Categories
-= view.hello_greeting
-p Another greeting #{view.hello_greeting}
-ul
-  each content
-    li= name

@@ -22,8 +22,9 @@ gem 'ember-rails'
 gem 'emblem-rails'
 
 # Bootstrap
-gem "less-rails" 
-gem "twitter-bootstrap-rails"
+gem "sass" 
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :github => 'anjlab/bootstrap-rails'
+gem "font-awesome-rails"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'active_model_serializers'

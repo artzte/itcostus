@@ -15,8 +15,15 @@ App.TransactionController = Em.ObjectController.extend
       my = @
       promise.then ->
         my.closeEditor()
+        # reload the unassigned pool
+        matcher.get('category').reload()
+        unassigned = my.get('controllers.categories.unassigned')
+        unassigned.reload()
     cancel: ->
       @closeEditor()
+  userCategories: (->
+    userCategories = @get 'controllers.categories.userCategories'
+    userCategories
+    ).property('controllers.categories.userCategories')
   closeEditor: ->
     @set 'isEditing', false
-

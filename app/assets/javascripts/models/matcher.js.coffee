@@ -1,10 +1,12 @@
 App.Matcher = App.Model.extend
   id: Ember.attr()
+  words: Ember.attr()
+
   category: Ember.belongsTo 'App.Category',
     key: 'category_id'
   transactions: Ember.hasMany 'App.Transaction',
     key: 'transaction_ids'
-  words: Ember.attr()
+
   terms: ( (key, value) ->
     @get('words').split /\s+/
   ).property('words')

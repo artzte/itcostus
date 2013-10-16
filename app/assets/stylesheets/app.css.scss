@@ -1,0 +1,20 @@
+@import "twitter/bootstrap";
+
+.itcostus {
+  padding: 70px 0;
+}
+
+.transaction-list {
+  .amount, .date {
+    text-align: right;
+  }
+
+  .description {
+    .words {
+      display: block
+    }
+    input, select {
+      width: 30em;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+.container
+  .row
+    .col-md-3
+      if content
+        ul class="list-unstyled"
+          each category in content
+            li
+              .pull-left
+                = linkTo "categories.show" category | #{category.name}
+              .pull-right
+                | #{category.amount} (#{category.count})
+              .clearfix
+      else
+        p No stinking categories!
+    .col-md-9
+      outlet

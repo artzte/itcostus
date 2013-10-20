@@ -21,9 +21,5 @@ App.TransactionController = Em.ObjectController.extend
         unassigned.reload()
     cancel: ->
       @closeEditor()
-  userCategories: (->
-    userCategories = @get 'controllers.categories.userCategories'
-    userCategories
-    ).property('controllers.categories.userCategories')
   closeEditor: ->
     @set 'isEditing', false

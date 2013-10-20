@@ -1,0 +1,32 @@
+h1 Matchers
+p Found #{length} rules
+table.table.table-condensed
+  thead
+    tr
+      th Category
+      th Terms
+      th Matches
+      th &nbsp;
+  tbody
+    each controller
+      tr
+        if isEditing
+          td= view App.MatcherCategorySelect contentBinding="controller.controllers.categories.userCategories" valueBinding="category" optionLabelPath='content.name' optionValuePath='content'
+          td= input value=words class='form-control' type='text'
+          td {{transactions.length}}
+          td.controls
+            button.btn.btn-default click='save'
+              | Save
+            button.btn.btn-default click='setEdit'
+              | Cancel
+
+        else
+          td {{category.name}}
+          td {{words}}
+          td {{transactions.length}}
+          td.controls
+            button.btn.btn-default click='delete'
+              | Delete
+            button.btn.btn-default click='setEdit'
+              | Edit
+

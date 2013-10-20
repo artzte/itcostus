@@ -13,7 +13,7 @@
               .form-group.words
                 = input value=matcher.words type='text' class='form-control'
               .form-group
-                view App.CategorySelect contentBinding="userCategories" valueBinding="matcher.category" optionLabelPath='content.name' optionValuePath='content' prompt='Pick a category' class='form-control'
+                view App.CategorySelect contentBinding="controller.controllers.categories.userCategories" valueBinding="matcher.category" optionLabelPath='content.name' optionValuePath='content' prompt='Pick a category' class='form-control'
               button.btn.btn-xs click='save'
                 i.icon-ok
               button.btn.btn-xs click='cancel'

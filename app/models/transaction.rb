@@ -121,4 +121,8 @@ class Transaction < ActiveRecord::Base
     #   puts e.inspect
     end
   end
+
+  def as_json options = {}
+    attributes.slice *%w{id account posted_at description amount transaction_type matcher_id category_id}
+  end
 end

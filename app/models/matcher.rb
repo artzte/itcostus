@@ -12,6 +12,13 @@ class Matcher < ActiveRecord::Base
     end
   end
 
+  after_update do
+    if words_changed? or category_id_changed?
+      CategoryTransaction.where(matcher_id: id).delete_all
+      run Category.unassigned.transactions
+    end
+  end
+
   def split_words
     @split_words ||= words.downcase.split
   end
@@ -38,6 +45,11 @@ class Matcher < ActiveRecord::Base
       end
     end
     matched
+  end
+
+  def self.sorted
+    joins("LEFT JOIN categories ON categories.id = matchers.category_id")
+    .order("categories.name, matchers.words")
   end
 
 end

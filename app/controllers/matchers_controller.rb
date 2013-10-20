@@ -1,6 +1,10 @@
 class MatchersController < ApplicationController
+  before_filter only: [:show, :update] do
+    @matcher = Matcher.find params[:id]
+  end
+
   def index
-    render json: Matcher.all
+    render json: Matcher.includes(:category_transactions).sorted
   end
 
   def create
@@ -13,8 +17,21 @@ class MatchersController < ApplicationController
     end
   end
 
-  def update
+  def show
+    render json: @matcher
+  end
 
+  def update
+    @matcher.attributes = matcher_params
+    if @matcher.update_attributes matcher_params
+      @matcher.category_transactions.load
+    end
+    render json: @matcher
+  end
+
+  def destroy
+    @matcher.destroy
+    render nothing: true
   end
 
 protected

@@ -8,7 +8,7 @@ App.MatchersShowController = Em.ObjectController.extend
     Em.debug "#{this} syncTransactions was called"
   ).observes('model.transactions.@each')
  App.MatcherController = Em.ObjectController.extend
-  needs: ['transactions', 'categories']
+  needs: ['transactions', 'categories', 'matchers']
   actions: 
     setEdit: ->
       editing = @get('isEditing')
@@ -16,7 +16,9 @@ App.MatchersShowController = Em.ObjectController.extend
         @get('model').revert()
       @set 'isEditing', !editing
     delete: ->
-      @destroy()
+      matcher = @get 'model'
+      @get('controllers.matchers').removeObject matcher
+      matcher.deleteRecord()
     save: ->
       promise = @get('content').save()
       my = @

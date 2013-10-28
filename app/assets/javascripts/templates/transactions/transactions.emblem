@@ -1,5 +1,5 @@
 .transaction-list
-  p #{this} page=#{page} total=#{pageTotal} start=#{pageStart} end=#{pageEnd} model.length=#{model.length} loading=#{loading}
+  = view App.PagerControlsView
   if loading
     .alert Loading #{this}...
   else
@@ -22,4 +22,5 @@
             = description
     else
       .alert.alert-info No transactions.
+    = view App.PagerControlsView
 

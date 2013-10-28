@@ -1,5 +1,5 @@
 class MatchersController < ApplicationController
-  before_filter only: [:show, :update] do
+  before_filter only: [:show, :update, :destroy] do
     @matcher = Matcher.find params[:id]
   end
 

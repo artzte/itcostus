@@ -2,7 +2,6 @@
 //= require handlebars
 //= require ember
 //= require ember-model
-//= require list-view
 //= require moment.min
 //= require_tree ./boot
 //= require_tree ./mixins

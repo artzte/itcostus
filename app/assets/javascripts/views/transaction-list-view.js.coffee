@@ -1,1 +1,1 @@
-App.TransactionListView = Ember.ListView.extend()
+# App.TransactionListView = Ember.ListView.extend()

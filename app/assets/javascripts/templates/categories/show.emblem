@@ -1,2 +1,2 @@
-h1= name
+h2 style="margin-top: 0; position: absolute" = name
 outlet "transactions"

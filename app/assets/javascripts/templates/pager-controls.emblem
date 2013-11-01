@@ -1,11 +1,11 @@
 ul.list-inline.pager-controls
   li Showing #{pageStart}-#{pageEnd} of #{pageTotal}
   li
-    button.btn.btn-default class={isFirstPage:btn-disabled} click='pageFirst' First
+    button class={:btn :btn-default} disabled={isFirstPage} click='pageFirst' First
   li
-    button.btn.btn-default class={isFirstPage:btn-disabled} click='pagePrevious' Previous
+    button class={:btn :btn-default} disabled={isFirstPage} click='pagePrevious' Previous
   li
-    button.btn.btn-default class={isLastPage:btn-disabled} click='pageNext' Next
+    button class={:btn :btn-default} disabled={isLastPage} click='pageNext' Next
   li
-    button.btn.btn-default class={isLastPage:btn-disabled} click='pageLast' Last
+    button class={:btn :btn-default} disabled={isLastPage} click='pageLast' Last
 .clearfix

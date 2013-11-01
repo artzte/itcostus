@@ -17,7 +17,7 @@ App.PagingMixin = Em.Mixin.create
 
     @setProperties
       pageTotal: len
-      pageStart: start
+      pageStart: start+1
       pageEnd: end
       pageCount: (len / perPage) >> 0
       model: pagedItems
@@ -38,6 +38,6 @@ App.PagingMixin = Em.Mixin.create
     @get('page') == 1
   ).property('page')
   isLastPage: ( ->
-    @get('page') == @get('pageLast')
+    @get('page') == @get('pageCount')
   ).property('page', 'pageLast', 'model')
 

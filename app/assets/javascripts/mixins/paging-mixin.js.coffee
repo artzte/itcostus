@@ -19,7 +19,7 @@ App.PagingMixin = Em.Mixin.create
       pageTotal: len
       pageStart: start+1
       pageEnd: end
-      pageCount: (len / perPage) >> 0
+      pageCount: ((len / perPage) >> 0) + (len % perPage > 0 ? 1 : 0)
       model: pagedItems
   actions:
     pageFirst: ->

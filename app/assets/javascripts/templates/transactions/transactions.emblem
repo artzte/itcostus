@@ -1,7 +1,7 @@
 .transaction-list
   = view App.PagerControlsView
   if loading
-    .alert Loading #{this}...
+    .alert.alert-info Loading transactions...
   else
     each controller
       .row data-id=id

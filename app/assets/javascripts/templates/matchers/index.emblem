@@ -25,8 +25,8 @@ table.table.table-condensed
           td {{words}}
           td {{transactions.length}}
           td.controls
-            button.btn.btn-default click='delete'
+            button.btn.btn-xs.btn-default click='delete'
               | Delete
-            button.btn.btn-default click='setEdit'
+            button.btn.btn-xs.btn-default click='setEdit'
               | Edit
 

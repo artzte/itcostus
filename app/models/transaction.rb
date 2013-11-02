@@ -39,7 +39,11 @@ class Transaction < ActiveRecord::Base
   end
 
   def split_words
-    @split_words ||= self.description.split.reject{|w| w.blank?}.collect(&:downcase)
+    @split_words ||= self.description
+      .split
+      .reject{|w| w.blank?}
+      .collect(&:downcase)
+      .collect{|w| w.gsub /\W/, ''}
   end
 
   def self.unassigned

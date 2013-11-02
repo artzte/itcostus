@@ -20,7 +20,10 @@ class Matcher < ActiveRecord::Base
   end
 
   def split_words
-    @split_words ||= words.downcase.split
+    @split_words ||= words
+      .downcase
+      .split
+      .collect{|w| w.gsub /\W/, ''}
   end
 
   def match transaction

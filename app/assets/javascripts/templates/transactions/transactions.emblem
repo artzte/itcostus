@@ -7,8 +7,8 @@
       .row data-id=id
         .col-md-2.date= postedAt
         .col-md-2.amount= amountString
-        .col-md-8.description click='setEdit'
-          if isEditing
+        if isEditing
+          .col-md-8.description
             form.form-inline submit='save'
               .form-group.words
                 = input value=matcher.words type='text' class='form-control'
@@ -18,7 +18,8 @@
                 i.icon-ok
               button.btn.btn-xs click='cancel'
                 i.icon-remove
-          else
+        else
+          .col-md-8.description click='setEdit'
             = description
     else
       .alert.alert-info No transactions.

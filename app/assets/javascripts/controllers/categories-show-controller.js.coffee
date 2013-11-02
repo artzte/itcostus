@@ -2,10 +2,15 @@ App.CategoriesShowController = Em.ObjectController.extend
   needs: ['transactions']
 
   syncTransactions: (->
-    categoryTransactions = @get('model.transactions') 
+    category = @get('model')
+    return unless category
 
     transactionsController = @get 'controllers.transactions'
-    transactionsController.set 'model', categoryTransactions
-    Em.debug "syncTransactions was called"
-  ).observes('model.transactions.@each')
+    category.set 'isLoaded', false
+    promise = App.Category.fetch(category.get('id'))
+    promise.then ->
+      transactionsController.set 'model', category.get('transactions')
+      console.log "transactions received", category.get('transactions.length')
+    console.log "sync called", category.get('name')
+  ).observes('model')
       

@@ -20,6 +20,10 @@ class Transaction < ActiveRecord::Base
     self.matcher_id = attributes['matcher_id']
   end
 
+  def self.sorted
+    order('posted_at DESC')
+  end
+
   def self.from_date date
     where("posted_at >= ?", date)
   end

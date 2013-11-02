@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
   def show
     get_category params[:id]
     @category.category_transactions.load
-    render json: @category, to: @to, from: @from
+    render json: @category, to: @to, from: @from, transactions: true
   end
 
 end

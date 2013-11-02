@@ -7,6 +7,7 @@ App.Category = App.Model.extend
   matchers: Ember.hasMany 'App.Matcher',
     key: 'matcher_ids'
   transactions: Ember.hasMany 'App.Transaction',
-    key: 'transaction_ids'
+    key: 'transactions'
+    embedded: true
 App.Category.url = "/categories"
 App.Category.adapter = Ember.RESTAdapter.create()

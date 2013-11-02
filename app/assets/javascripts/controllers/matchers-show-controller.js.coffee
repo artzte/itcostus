@@ -7,7 +7,7 @@ App.MatchersShowController = Em.ObjectController.extend
     transactionsController.set 'model', categoryTransactions
     Em.debug "#{this} syncTransactions was called"
   ).observes('model.transactions.@each')
- App.MatcherController = Em.ObjectController.extend
+App.MatcherController = Em.ObjectController.extend
   needs: ['transactions', 'categories', 'matchers']
   actions: 
     setEdit: ->

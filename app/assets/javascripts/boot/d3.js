@@ -1,3 +1,5 @@
+// stolen from http://misoproject.com/d3-chart/examples/basic.html
+
 d3.chart('BarChart', {
   initialize: function() {
     var chart = this;

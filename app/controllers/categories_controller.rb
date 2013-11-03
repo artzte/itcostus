@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
 
   def show
     get_category params[:id]
-    @category.category_transactions.load
+    @category.transactions.with_matcher.with_denormalized_category_and_matcher.order(:posted_at).load
     render json: @category, to: @to, from: @from, transactions: true
   end
 

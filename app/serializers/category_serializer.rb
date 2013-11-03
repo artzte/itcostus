@@ -29,6 +29,8 @@ protected
         .where("ct.id IS NULL")
     else
       object.transactions
+        .with_matcher
+        .with_denormalized_category_and_matcher
     end
     txns = txns.to_date options[:to] if options[:to]
     txns = txns.from_date options[:from] if options[:from]

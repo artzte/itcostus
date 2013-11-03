@@ -33,11 +33,14 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.with_matcher
-    joins('LEFT JOIN category_transactions ON category_transactions.transaction_id = transactions.id')
-      .joins('LEFT JOIN matchers ON category_transactions.matcher_id = matchers.id')
-      .select('transactions.*, category_transactions.category_id AS category_id, matchers.id AS matcher_id')
+    joins('LEFT JOIN matchers ON category_transactions.matcher_id = matchers.id')
   end
 
+  def self.with_denormalized_category_and_matcher
+    select('transactions.*, category_transactions.category_id AS category_id, matchers.id AS matcher_id')
+  end
+
+  
   def split_words
     @split_words ||= self.description
       .split

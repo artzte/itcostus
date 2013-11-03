@@ -32,3 +32,27 @@ td.controls {
     }
   }
 }
+
+.category-months-bar {
+  .chart {
+    .label {
+      font-size: 10px;
+    }
+    .ylabels .tick line {
+      fill: none;
+      stroke: #222;
+      stroke-width: 1px;
+      shape-rendering: crispEdges;
+    }
+    .path.domain {
+      fill: none;
+      stroke: #222;
+      stroke-width: 1px;
+      shape-rendering: crispEdges;
+    }
+    .bars rect.bar {
+      fill: steelblue;
+      stroke: white;
+    }
+  }
+}

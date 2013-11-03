@@ -1,2 +1,3 @@
-h2 style="margin-top: 0; position: absolute" = name
+h2 style="margin: 0" = name
+= category-months-bar monthlySummary=monthlySummary 
 outlet "transactions"

@@ -3,6 +3,8 @@
 //= require ember
 //= require ember-model
 //= require moment.min
+//= require d3.v3
+//= require d3.chart
 //= require_tree ./boot
 //= require_tree ./mixins
 //= require_tree ./models

@@ -1,13 +1,12 @@
 .container
   .row
-    .col-md-3
+    .col-md-3.category-list
       ul class="list-unstyled"
-        each category in content
+        each category in arrangedContent itemController='category'
           li
-            .pull-left
-              = linkTo "categories.show" category | #{category.name}
-            .pull-right
-              | #{category.amount} (#{category.count})
+            button class={:btn :btn-default cssWeight} click="navTo category"
+              .category-name= category.name
+              .stats #{category.amount} (#{category.count})
             .clearfix
     .col-md-9
       outlet

@@ -9,6 +9,12 @@ App.Category = App.Model.extend
   transactions: Ember.hasMany 'App.Transaction',
     key: 'transactions'
     embedded: true
+  weight: (->
+    if @get('system_type') == 'unassigned'
+      10000000
+    else
+      @get('count')
+  ).property('system_type', 'count')
   monthlySummary: ( ->
     transactions = @get('transactions')
     summary = {}

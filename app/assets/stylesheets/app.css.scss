@@ -56,3 +56,20 @@ td.controls {
     }
   }
 }
+
+
+.category-list {
+  position: relative;
+  button {
+    width: 100%;
+    clear: both;
+    .category-name {
+      float: left;
+      text-align: left;
+    }
+    .stats {
+      float: right;
+      text-align: right;
+    }
+  }
+}

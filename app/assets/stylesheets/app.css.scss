@@ -5,6 +5,9 @@
 }
 
 .transaction-list {
+  .row.selected {
+    background: lightblue;
+  }
   .amount, .date {
     text-align: right;
   }

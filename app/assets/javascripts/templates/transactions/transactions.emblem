@@ -3,12 +3,19 @@
   if loading
     .alert.alert-info Loading transactions...
   else
+    .row.header
+      .col-md-1
+      .col-md-2.date Date
+      .col-md-2.amount Amount
+      .col-md-6.description Description
     each controller
-      .row data-id=id
+      div class={selected:selected :row} data-id=id
+        .col-md-1.select
+          = input type=checkbox checked=selected
         .col-md-2.date= postedAt
         .col-md-2.amount= amountString
         if isEditing
-          .col-md-8.description
+          .col-md-6.description
             form.form-inline submit='save'
               .form-group.words
                 = input value=matcher.words type='text' class='form-control'
@@ -19,7 +26,7 @@
               button.btn.btn-xs click='cancel'
                 i.icon-remove
         else
-          .col-md-8.description click='setEdit'
+          .col-md-6.description click='setEdit'
             = description
     else
       .alert.alert-info No transactions.

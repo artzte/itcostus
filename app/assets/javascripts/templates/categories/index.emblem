@@ -3,10 +3,6 @@
     .col-md-3.category-list
       ul class="list-unstyled"
         each category in arrangedContent itemController='category'
-          li
-            button class={:btn :btn-default cssWeight} click="navTo category"
-              .category-name= category.name
-              .stats #{category.amount} (#{category.count})
-            .clearfix
+          = view App.CategoriesIndexItem
     .col-md-9
       outlet

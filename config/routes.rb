@@ -5,7 +5,12 @@ FirsttechBudgeting::Application.routes.draw do
   resources :categories do
     resources :transactions, controller: 'category_transactions', only: [:create, :destroy, :index]
   end
-  resources :matchers
+  resources :matchers do
+    collection do
+      post :rerun
+      post :match_transactions
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

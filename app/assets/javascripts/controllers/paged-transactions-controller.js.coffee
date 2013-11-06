@@ -1,6 +1,4 @@
-App.PagedTransactionsController = Em.ArrayController.extend App.PagingMixin,
-  needs: ['transactions', 'categories']
-  itemController: 'transaction'
+App.PagedTransactionsController = App.TransactionsController.extend App.PagingMixin,
   perPage: 100
   setPageTransactions: (->
     Em.debug "setPageTransactions was called"
@@ -12,6 +10,3 @@ App.PagedTransactionsController = Em.ArrayController.extend App.PagingMixin,
     Em.run.scheduleOnce 'afterRender', @, ->
       @set 'loading', false
   ).observes('controllers.transactions.model.@each', 'page')
-  dropped: ->
-    dropSource = @get('controllers.categories.dragSource')
-    console.log dropSource.get('name')

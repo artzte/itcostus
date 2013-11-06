@@ -8,6 +8,7 @@
 //= require_tree ./boot
 //= require_tree ./mixins
 //= require_tree ./models
+//= require controllers/transactions-controller
 //= require_tree ./controllers
 //= require_tree ./routes
 //= require views/index-view

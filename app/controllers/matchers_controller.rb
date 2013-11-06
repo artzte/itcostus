@@ -17,6 +17,24 @@ class MatchersController < ApplicationController
     end
   end
 
+  def match_transactions
+    Rails.logger.info match_transactions_params
+    transactions = Transaction
+      .where(id: match_transactions_params[:transaction_ids])
+      .includes :category_transaction
+    category = Category.find match_transactions_params[:category_id]
+
+    # clear any attached matchers, then build a new matcher and connect
+    # it manually
+    transactions.each do |transaction|
+      transaction.category_transaction.destroy if transaction.category_transaction
+      matcher = Matcher.create category: category, words: transaction.description
+      transaction.create_category_transaction matcher: matcher, category: category
+    end
+
+    render json: transactions
+  end
+
   def show
     render json: @matcher
   end
@@ -38,6 +56,10 @@ protected
 
   def matcher_params
     params.require(:matcher).permit(:category_id, :words)
+  end
+
+  def match_transactions_params
+    params.require(:matcher).permit(:category_id, :transaction_ids => [])
   end
 
 end

@@ -1,5 +1,5 @@
 class Matcher < ActiveRecord::Base
-  has_many :category_transactions
+  has_many :category_transactions, dependent: :destroy
   has_many :transactions, through: :category_transactions
   belongs_to :category
 
@@ -14,7 +14,7 @@ class Matcher < ActiveRecord::Base
 
   after_update do
     if words_changed? or category_id_changed?
-      CategoryTransaction.where(matcher_id: id).delete_all
+      category_transactions.delete_all
       run Category.unassigned.transactions
     end
   end
@@ -53,6 +53,14 @@ class Matcher < ActiveRecord::Base
   def self.sorted
     joins("LEFT JOIN categories ON categories.id = matchers.category_id")
     .order("categories.name, matchers.words")
+  end
+
+  def self.run transactions
+    matchers = Matcher.order("char_length(words) DESC")
+    matchers.each do |matcher|
+      matcher.run transactions
+      transactions.reload
+    end
   end
 
 end

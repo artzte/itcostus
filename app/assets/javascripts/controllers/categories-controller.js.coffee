@@ -10,6 +10,10 @@ App.CategoriesController = Em.ArrayController.extend
   sortProperties: ['weight']
   sortAscending: false
 App.CategoryController = Em.ObjectController.extend
+  needs: ['categories']
   actions:
     navTo: ->
       @transitionToRoute 'categories.show', @get('model')
+  setDragSource: ->
+    @set 'controllers.categories.dragSource', @get('model')
+

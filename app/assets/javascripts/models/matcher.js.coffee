@@ -19,3 +19,11 @@ App.Matcher = App.Model.extend
 
 App.Matcher.url = "/matchers"
 App.Matcher.adapter = Ember.RESTAdapter.create()
+App.Matcher.bulkSave = (category, transactions) ->
+    Em.$.ajax
+      url: "/matchers/match_transactions"
+      data:
+        matcher:
+          category_id: category.get('id')
+          transaction_ids: transactions.getEach 'id'
+      type: 'post'

@@ -8,6 +8,5 @@ App.Router.map ->
 p1 = App.Category.fetch()
 p2 = App.Matcher.fetch()
 
-$.when(p1, p2).done ->
-  Em.run.next ->
-    App.advanceReadiness()
+Ember.RSVP.all([p1, p2]).then ->
+  App.advanceReadiness()

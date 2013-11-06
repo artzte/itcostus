@@ -3,11 +3,10 @@ App.CategoriesRoute = Em.Route.extend
     App.Category.findAll()
   setupController: (controller, model) ->
     @_super controller, model
-    unassigned = model.findBy('system_type', 'unassigned')
+    unassigned = controller.get 'unassigned'
     @controllerFor('categoriesShow').set('model', unassigned)
     @controllerFor('pagedTransactions').setProperties
       page: 1
-      loading: true
 
   renderTemplate: ->
     @render 'categories',

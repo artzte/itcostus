@@ -7,6 +7,4 @@ App.PagedTransactionsController = App.TransactionsController.extend App.PagingMi
       @set 'model', transactions
     else
       @pageContent transactions
-    Em.run.scheduleOnce 'afterRender', @, ->
-      @set 'loading', false
   ).observes('controllers.transactions.model.@each', 'page')

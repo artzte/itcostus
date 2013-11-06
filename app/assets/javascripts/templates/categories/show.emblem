@@ -1,5 +1,4 @@
 h2 style="margin: 0" = name
-= this
 ul.nav.nav-tabs
   li class=transactionsTabActive
     a click="tab 'transactions'" Transactions

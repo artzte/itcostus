@@ -5,7 +5,6 @@ App.CategoriesShowRoute = Em.Route.extend
     @_super controller, model
     @controllerFor('pagedTransactions').setProperties
       page: 1
-      loading: true
 
   renderTemplate: ->
     @_super()

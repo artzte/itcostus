@@ -1,3 +1,12 @@
 h2 style="margin: 0" = name
-= category-months-bar monthlySummary=monthlySummary 
-outlet "transactions"
+= this
+ul.nav.nav-tabs
+  li class=transactionsTabActive
+    a click="tab 'transactions'" Transactions
+  li class=graphTabActive
+    a click="tab 'graph'" Summary
+.tab-content
+  div class={:tab-pane transactionsTabActive}
+    outlet "transactions"   
+  div class={:tab-pane graphTabActive}
+    = category-months-bar monthlySummary=monthlySummary 

@@ -12,7 +12,7 @@
             .pull-left Description
             .pull-right = view App.PagerControlsView
       tbody
-        each controller
+        each paginatedContent itemController="transaction"
           tr class={selected:selected}
             td= input type=checkbox checked=selected
             td.date= postedAt

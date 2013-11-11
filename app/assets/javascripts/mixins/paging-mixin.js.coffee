@@ -1,11 +1,13 @@
 App.PagingMixin = Em.Mixin.create
-  pageContent: (contentArray) ->
+  paginatedContent: (->
     page = @get('page') || 1
-    perPage = @get('_perPage')
-    len = contentArray.get 'length'
+    perPage = @get('perPage')
+    len = @get 'length'
 
     start = (page-1) * perPage
     end = start + perPage
+
+    console.log "pC", @, len
 
     if len <= start
       start = 0
@@ -13,14 +15,28 @@ App.PagingMixin = Em.Mixin.create
 
     end = Math.min(len, start+perPage)
 
-    pagedItems = contentArray.slice(start, end)
+    pagedItems = @slice(start, end)
 
     @setProperties
-      pageTotal: len
       pageStart: start+1
       pageEnd: end
-      pageCount: ((len / perPage) >> 0) + (len % perPage > 0 ? 1 : 0)
-      model: pagedItems
+
+    pagedItems
+  ).property('length', 'page')
+
+  pageCount: ( ->
+    len = @get 'length'
+    perPage = @get 'perPage'
+
+    count = ((len / perPage) >> 0)
+
+    # remainder present?
+    if (len % perPage) > 0
+      count += 1
+
+    count
+  ).property('length', 'perPage')
+
   actions:
     pageFirst: ->
       return if @get('page')==1
@@ -33,11 +49,11 @@ App.PagingMixin = Em.Mixin.create
       return if @get('page')==@get('pageCount')
       @set 'page', @get('pageCount')
 
-  _perPage: 100
+  perPage: 100
   isFirstPage: ( ->
     @get('page') == 1
   ).property('page')
   isLastPage: ( ->
     @get('page') == @get('pageCount')
-  ).property('page', 'pageLast', 'model')
+  ).property('page', 'pageCount')
 

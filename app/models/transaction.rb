@@ -32,6 +32,10 @@ class Transaction < ActiveRecord::Base
     where("posted_at < ?", date)
   end
 
+  def self.with_category_transaction
+    joins('LEFT JOIN category_transactions ON category_transactions.transaction_id = transactions.id')
+  end
+
   def self.with_matcher
     joins('LEFT JOIN matchers ON category_transactions.matcher_id = matchers.id')
   end
@@ -55,7 +59,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.run_matchers overwrite = true
-    transactions = Transaction.with_matcher
+    transactions = Transaction.with_category_transaction.with_matcher
     if overwrite
       CategoryTransaction.delete_all
     else

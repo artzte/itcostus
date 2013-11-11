@@ -4,7 +4,6 @@ namespace :budget do
     account = ENV['ACCOUNT']
     file = ENV['FILE']
 
-    Transaction.where(account: account).delete_all
     Transaction.import file, account
     Transaction.run_matchers true
   end

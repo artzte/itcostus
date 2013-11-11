@@ -1,5 +1,12 @@
 == README
 
+todo - 
+  - summary of all months present
+  - sorting of the transactions list esp. by value
+  - ability to alter the description with a meta description e.g. for checks
+  - need to push matcher update when id present
+  - need to occasionally split transactions - make a child?
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

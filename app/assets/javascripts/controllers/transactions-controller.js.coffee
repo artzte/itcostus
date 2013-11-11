@@ -1,5 +1,6 @@
-App.TransactionsController = Em.ArrayController.extend
-  needs: ['transactions', 'categories']
+App.TransactionsController = Em.ArrayController.extend App.PagingMixin,
+  needs: ['categories']
+  perPage: 100
   itemController: 'transaction'
   init: ->
     @_super()

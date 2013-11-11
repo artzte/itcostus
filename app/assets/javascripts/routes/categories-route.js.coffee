@@ -5,7 +5,7 @@ App.CategoriesRoute = Em.Route.extend
     @_super controller, model
     unassigned = controller.get 'unassigned'
     @controllerFor('categoriesShow').set('model', unassigned)
-    @controllerFor('pagedTransactions').setProperties
+    @controllerFor('transactions').setProperties
       page: 1
 
   renderTemplate: ->
@@ -17,4 +17,4 @@ App.CategoriesRoute = Em.Route.extend
     @render 'transactions',
       into: 'categories.show'
       outlet: 'transactions'
-      controller: @controllerFor('pagedTransactions')
+      controller: @controllerFor('transactions')

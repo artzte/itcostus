@@ -4,6 +4,9 @@ App.Category = App.Model.extend
   system_type: Ember.attr()
   count: Ember.attr(Number)
   total: Ember.attr(Number)
+  unassigned: (->
+    @get('system_type') == 'unassigned'
+  ).property('system_type')
   matchers: Ember.hasMany 'App.Matcher',
     key: 'matcher_ids'
   transactions: Ember.hasMany 'App.Transaction',

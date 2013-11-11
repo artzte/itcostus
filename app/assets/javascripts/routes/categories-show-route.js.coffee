@@ -3,12 +3,16 @@ App.CategoriesShowRoute = Em.Route.extend
     App.Category.find(params.id)
   setupController: (controller, model) ->
     @_super controller, model
-    @controllerFor('pagedTransactions').setProperties
-      page: 1
+    transactionsController = @controllerFor('transactions')
+
+    model.reload().then ->
+      transactionsController.setProperties
+        model: model.get('transactions')
+        page: 1
 
   renderTemplate: ->
     @_super()
     @render 'transactions',
       into: 'categories.show'
       outlet: 'transactions'
-      controller: @controllerFor('pagedTransactions')
+      controller: @controllerFor('transactions')

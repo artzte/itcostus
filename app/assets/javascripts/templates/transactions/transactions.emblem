@@ -6,8 +6,8 @@
       thead
         tr
           th &nbsp;
-          th.date Date
-          th.amount Amount
+          th.date click='sort "postedAt"' Date
+          th.amount click='sort "amount"' Amount
           th.description 
             .pull-left Description
             .pull-right = view App.PagerControlsView

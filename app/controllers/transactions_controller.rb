@@ -14,4 +14,15 @@ class TransactionsController < ApplicationController
     render json: transactions 
   end
 
+  def update
+    transaction = Transaction.find(params[:id])
+    transaction.update_attributes(transaction_params)
+    render json: transaction
+  end
+
+protected
+  def transaction_params
+    params.require(:transaction).permit(:note)
+  end
+
 end

@@ -1,5 +1,9 @@
 h1 Matchers
-p Found #{length} rules
+.pull-left
+  p Found #{length} rules
+.pull-right
+  button.btn.btn-primary click="rerun" Re-run all
+.clearfix
 table.table.table-condensed
   thead
     tr

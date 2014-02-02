@@ -5,6 +5,7 @@ App.Transaction = App.Model.extend
   description: Ember.attr()
   amount: Ember.attr(Number)
   transaction_type: Ember.attr()
+  note: Ember.attr()
 
   matcher: Ember.belongsTo 'App.Matcher',
     key: 'matcher_id'
@@ -12,16 +13,19 @@ App.Transaction = App.Model.extend
     key: 'category_id'
 
   amountString: (->
-    @get('amount').toFixed(2)
-  ).property('amount')
+      @get('amount').toFixed(2)
+    ).property('amount')
   terms: (->
-    words = @get('description')||''
-    words.split /\s+/
-  ).property('description')
+      words = @get('description')||''
+      words.split /\s+/
+    ).property('description')
   postedAt: (->
-    date = moment @get('posted_at')
-    date.format("L")
-  ).property('posted_at')
+      date = moment @get('posted_at')
+      date.format("L")
+    ).property('posted_at')
+  transactionType: (->
+    @get('transaction_type')
+    ).property('transaction_type')
   validate: ->
     @_super()
 

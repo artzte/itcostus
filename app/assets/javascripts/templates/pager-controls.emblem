@@ -1,5 +1,5 @@
 ul.list-inline.pager-controls
-  li Showing #{pageStart}-#{pageEnd} of #{pageTotal}
+  li Showing #{pageStart}-#{pageEnd} of #{model.length}
   li
     button class={:btn :btn-default} disabled={isFirstPage} click='pageFirst' First
   li

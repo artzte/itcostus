@@ -1,5 +1,5 @@
 App.TransactionsController = Em.ArrayController.extend App.PagingMixin,
-  needs: ['categories']
+  needs: ['categories', 'categoriesShow']
   perPage: 100
   itemController: 'transaction'
   sortProperties: ['posted_at']
@@ -18,3 +18,4 @@ App.TransactionsController = Em.ArrayController.extend App.PagingMixin,
     promise.then ->
       category.reload()
       my.get('controllers.categories.unassigned').reload()
+      my.get('controllers.categoriesShow.model').reload()

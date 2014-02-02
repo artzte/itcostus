@@ -1,11 +1,15 @@
 == README
 
 todo - 
+  - add a type column
+  - add category metadata such as budget category
   - summary of all months present
   - sorting of the transactions list esp. by value
   - ability to alter the description with a meta description e.g. for checks
   - need to push matcher update when id present
-  - need to occasionally split transactions - make a child?
+
+done  
+  - need to occasionally split transactions - make a child? (direct assignation of matcher kinda solves this for the interim)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

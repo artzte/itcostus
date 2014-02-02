@@ -18,18 +18,20 @@ class MatchersController < ApplicationController
   end
 
   def match_transactions
-    Rails.logger.info match_transactions_params
     transactions = Transaction
       .where(id: match_transactions_params[:transaction_ids])
       .includes :category_transaction
     category = Category.find match_transactions_params[:category_id]
 
-    # clear any attached matchers, then build a new matcher and connect
-    # it manually
+    # destroy any attached matchers
+    CategoryTransaction
+      .where(transaction_id: transactions.collect(&:id))
+      .destroy_all
+
+    # clear any attached matchers, then build a new matcher and connect it
     transactions.each do |transaction|
-      transaction.category_transaction.destroy if transaction.category_transaction
-      matcher = Matcher.create category: category, words: transaction.description
-      transaction.create_category_transaction matcher: matcher, category: category
+      matcher = Matcher.create category: category, transaction_id: transaction.transaction_id
+      matcher.run transaction, true
     end
 
     render json: transactions

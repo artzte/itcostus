@@ -28,4 +28,26 @@ class Category < ActiveRecord::Base
     where(system_type: nil)
   end
 
+  def self.budgetary
+    where(reporting_type: 'budget')
+  end
+
+  def month_summaries
+    if unassigned?
+      connection
+        .select_rows %Q{
+          select date_format(t.posted_at, "%Y-%m"), sum(t.amount) from transactions t
+          left join category_transactions ct ON ct.transaction_id = t.id
+          where ct.id IS NULL
+          group by year(t.posted_at), month(t.posted_at)
+        }
+    else
+      connection
+        .select_rows %Q{
+          select date_format(t.posted_at, "%Y-%m"), sum(t.amount) from transactions t
+          inner join category_transactions ct ON ct.transaction_id = t.id AND ct.category_id = #{id}
+          group by year(t.posted_at), month(t.posted_at)
+        }
+    end
+  end
 end

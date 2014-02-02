@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130908032141) do
+ActiveRecord::Schema.define(version: 20131116230632) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
     t.string   "system_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "reporting_type"
   end
 
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
@@ -37,6 +38,7 @@ ActiveRecord::Schema.define(version: 20130908032141) do
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "transaction_id"
   end
 
   create_table "transactions", force: true do |t|
@@ -49,6 +51,7 @@ ActiveRecord::Schema.define(version: 20130908032141) do
     t.integer  "category_override_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "note"
   end
 
   add_index "transactions", ["posted_at"], name: "index_transactions_on_posted_at", using: :btree

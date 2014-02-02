@@ -6,7 +6,7 @@ class CategoryTransaction < ActiveRecord::Base
 
   before_destroy do
     if matcher.transactions.count == 1
-      matcher.destroy
+      matcher.delete
     end
   end
 end

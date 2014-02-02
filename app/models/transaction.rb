@@ -74,10 +74,9 @@ class Transaction < ActiveRecord::Base
       winner = nil
       CategoryTransaction.where(transaction_id: transaction.id).delete_all
       match_attempts.each do |matcher|
-        new_category = matcher.match(transaction)
-        if new_category
+        if matcher.match(transaction)
           winner = matcher
-          CategoryTransaction.create transaction: transaction, matcher: winner, category: new_category
+          CategoryTransaction.create transaction: transaction, matcher: winner, category: matcher.category
           count_matched += 1
           break
         end
@@ -138,6 +137,6 @@ class Transaction < ActiveRecord::Base
   end
 
   def as_json options = {}
-    attributes.slice *%w{id account posted_at description amount transaction_type matcher_id category_id}
+    attributes.slice *%w{id account posted_at description note amount transaction_type matcher_id category_id}
   end
 end

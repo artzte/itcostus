@@ -54,6 +54,12 @@ class MatchersController < ApplicationController
     render nothing: true
   end
 
+  def rerun
+    CategoryTransaction.delete_all
+    Matcher.run Category.unassigned.transactions
+    render nothing: true
+  end
+
 protected
 
   def matcher_params

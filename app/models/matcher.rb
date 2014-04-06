@@ -28,7 +28,9 @@ class Matcher < ActiveRecord::Base
       .collect{|w| w.gsub /\W/, ''}
   end
 
-  def match transaction, force = true
+  def match transaction, force = false
+    return true if force 
+
     if transaction_id?
       return transaction.id == self.transaction_id
     end
@@ -45,7 +47,7 @@ class Matcher < ActiveRecord::Base
     return true
   end
 
-  def run transactions, force =  true
+  def run transactions, force = false
     transactions = [transactions].flatten
     matched = []
     transactions.each do |t|

@@ -33,5 +33,15 @@ describe Matcher do
     CategoryTransaction.first.transaction.description.must_equal @descriptions.first
   end
 
+  it "matches twist" do
+    m = Matcher.new words: "TWIST SEATTLE WA US"
+    t = Transaction.new description: "TWIST                    SEATTLE      WA US"
+    m.match(t).must_equal true
+
+    t = Transaction.new description: "UNITED ENERGY            FLETCHER     NC US"
+    m.match(t).must_equal false
+  end
+
+
 end
 

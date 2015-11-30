@@ -41,16 +41,16 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.with_denormalized_category_and_matcher
-    select('transactions.*, category_transactions.category_id AS category_id, matchers.id AS matcher_id')
+    select('transactions.*, category_transactions.category_id AS category_id, category_transactions.matcher_id AS matcher_id')
   end
 
-  
+
   def split_words
     @split_words ||= self.description
       .split
       .reject{|w| w.blank?}
       .collect(&:downcase)
-      .collect{|w| w.gsub /\W/, ''}
+      .collect{|w| w.gsub(/\W/, '')}
   end
 
   def self.unassigned

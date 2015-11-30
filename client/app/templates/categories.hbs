@@ -1,0 +1,28 @@
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Count</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each model as |category|}}
+    {{#categories/list-item category=category}}
+      <td>
+        {{#link-to 'category' category.id}}
+          {{category.name}}
+        {{/link-to}}
+      </td>
+      <td class="numeric">
+        {{category.count}}
+      </td>
+      <td class="currency">
+        {{category.amount}}
+      </td>
+    {{/categories/list-item}}
+  {{/each}}
+  </tbody>
+</table>
+
+{{outlet 'category'}}

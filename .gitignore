@@ -14,3 +14,11 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+.byebug_history
+.ruby-version
+client/tmp
+client/dist
+client/node_modules
+client/bower_components
+

@@ -1,0 +1,63 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th class="date">
+        Date
+      </th>
+      <th class="type">
+        Type
+      </th>
+      <th>
+        Amount
+      </th>
+      <th class="description">
+        Description
+      </th>
+      <th>
+        &lt; &gt;
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each category.transactions as |transaction|}}
+      {{#category/transactions-list-item transaction=transaction as |listItem|}}
+        <td>{{input type='checkbox' checked=selected}}</td>
+        <td class="date">{{fmt-date date=transaction.postedAt}}</td>
+        <td class="type">{{transaction.transactionType}}</td>
+        <td class="currency">{{transaction.amount}}</td>
+        <td>
+          {{#if listItem.isEditing}}
+            <form {{action 'save' on='submit'}}>
+              <div class='field'>
+                {{input value=transaction.note type="text" class="form-control" prompt="Type a note"}}
+              </div>
+              <div class='field'>
+                {{input value=transaction.matcher.words type="text" class="form-control" prompt="Type a note"}}
+              </div>
+              <div class='field'>
+                {{categories/category-picker categories=categories value=transaction.category}}
+              </div>
+              <ul class='actions'>
+                <li>
+                  <button {{action (action 'save' target=listItem)}}>Save</button>
+                </li>
+                <li>
+                  <button {{action (action 'cancelEdit' target=listItem)}}>Cancel</button>
+                </li>
+              </ul>
+            </form>
+          {{else}}
+            <div {{action (action 'setEdit' target=listItem)}}>
+              {{transaction.description}}
+            </div>
+          {{/if}}
+        </td>
+      {{/category/transactions-list-item}}
+    {{else}}
+      <tr>
+        <td colspan=4>No transactions.</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

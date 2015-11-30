@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-FirsttechBudgeting::Application.load_tasks
+Itcostus::Application.load_tasks

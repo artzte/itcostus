@@ -1,5 +1,0 @@
-li
-  button class={:btn :btn-default cssWeight} click="navTo category"
-    .category-name= category.name
-    .stats #{category.amount} (#{category.count})
-  .clearfix

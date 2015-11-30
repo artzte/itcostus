@@ -1,39 +1,22 @@
 class CategorySerializer < ActiveModel::Serializer
-  attributes :id, :name, :system_type, :matcher_ids, :count
+  attributes :id, :name, :usage, :count, :amount
 
-  def attributes
-    data = super
-    if options[:transactions]
-      data[:transactions] = transactions
-    end
-    data
-  end
+  has_many :matchers
+  has_many :transactions
 
   def count
     object.transactions.count
   end
 
-  def matcher_ids
-    Matcher.connection.select_values %Q{
-        SELECT matchers.id
-        FROM matchers
-        WHERE matchers.category_id = #{object.id}
-      }
+  def sum
+    object.transactions.sum(:amount)
   end
 
-protected
-  def transactions
-    txns = if object.unassigned?
-      Transaction
-        .joins("LEFT JOIN category_transactions ct ON (ct.transaction_id = transactions.id)")
-        .where("ct.id IS NULL")
-    else
-      object.transactions
-        .with_matcher
-        .with_denormalized_category_and_matcher
-    end
-    txns = txns.to_date options[:to] if options[:to]
-    txns = txns.from_date options[:from] if options[:from]
-    txns.sorted
+  def amount
+    object.transactions.sum(:amount)
+  end
+
+  def usage
+    object.system_type
   end
 end

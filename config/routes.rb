@@ -1,10 +1,7 @@
-FirsttechBudgeting::Application.routes.draw do
-  resources :app, only: [:index]
-  
-  resources :transactions
-  resources :categories do
-    resources :transactions, controller: 'category_transactions', only: [:create, :destroy, :index]
-  end
+Itcostus::Application.routes.draw do
+  resources :transactions, except: [:new, :edit]
+  resources :categories, except: [:new, :edit]
+  resources :category_transactions, only: [:index]
   resources :matchers do
     collection do
       post :rerun

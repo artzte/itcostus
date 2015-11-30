@@ -1,8 +1,0 @@
-.container
-  .row
-    .col-md-3.category-list
-      ul class="list-unstyled"
-        each category in arrangedContent itemController='category'
-          = view App.CategoriesIndexItem
-    .col-md-9
-      outlet

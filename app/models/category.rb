@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
   has_many :category_transactions
-  has_many :transactions, through: :category_transactions
+  has_many :transactions, through: :category_transactions, source: :linked_transaction
   has_many :matches, through: :category_transactions
   has_many :matchers
 

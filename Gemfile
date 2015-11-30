@@ -3,45 +3,26 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
-# Use sqlite3 as the database for Active Record
-gem 'mysql2', '~> 0.3.20'
+gem 'rails-api'
 
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+# Use mysql as the database for Active Record
+gem 'mysql2', '~> 0.3.18'
 
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem "active_model_serializers", '0.10.0.rc3'
 
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+gem "byebug"
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
+# To use ActiveModel has_secure_password
+# gem 'bcrypt', '~> 3.1.7'
 
-gem 'ember-rails'
-gem 'emblem-rails'
-
-# Bootstrap
-gem "sass" 
-gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :github => 'anjlab/bootstrap-rails'
-gem "font-awesome-rails"
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'active_model_serializers'
-
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+# To use Jbuilder templates for JSON
+# gem 'jbuilder'
 
 # Use unicorn as the app server
-gem 'unicorn'
+# gem 'unicorn'
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
+# Deploy with Capistrano
+# gem 'capistrano', :group => :development
 
-# Use debugger
-gem 'byebug', group: [:development, :test]
+# To use debugger
+# gem 'ruby-debug19', :require => 'ruby-debug'

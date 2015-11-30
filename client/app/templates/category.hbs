@@ -1,0 +1,22 @@
+<h2>{{model.name}}</h2>
+<ul class='nav nav-tabs'>
+  <li class='transactionsTabActive'>
+    <a {{action 'tab' 'transactions'}}>
+      Transactions
+    </a>
+  </li>
+  <li>
+    <a {{action 'tab' 'graph'}}>
+      Summary
+    </a>
+  </li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane {{transactionsTab:active}}">
+    {{category/transactions-list category=model}}
+  </div>
+  <div class="tab-pane {{graphTab:active}}">
+    {{category/months-bar monthlySummary=monthlySummary}}
+  </div>
+</div>
+{{outlet}}
